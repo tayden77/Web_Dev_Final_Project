@@ -8,7 +8,7 @@ from .models import *
 from .forms import *
 from .api_service import *
 
-
+# Generic Login View
 def login_view(request):
     if request.method == "POST":
 
@@ -30,12 +30,12 @@ def login_view(request):
         next_url = request.GET.get("next", "index")
         return render(request, "characterforge/login.html", {"next": next_url})
 
-
+# Generic Logout View
 def logout_view(request):
     logout(request)
     return redirect("index")
 
-
+# Generic Register View
 def register(request):
     if request.method == "POST":
         username = request.POST["username"]
@@ -62,7 +62,7 @@ def register(request):
     else:
         return render(request, "characterforge/register.html")
 
-
+# Home page of the site
 @login_required(login_url='login')
 def index(request):
     return render(request, 'characterforge/index.html')
@@ -77,18 +77,17 @@ def index(request):
 def initailize_character(request):
     character = Character.objects.create(
         user=request.user,
-        strength=10,  # default value
-        dexterity=10, # default value
-        constitution=10, # default value
-        intelligence=10, # default value
-        wisdom=10, # default value
-        charisma=10, # default value
-        name="Character Name", # default name
-        # Set foreign keys to None initially or to a default value if you have one
+        strength=8,
+        dexterity=8,
+        constitution=8,
+        intelligence=8,
+        wisdom=8,
+        name="Character Name",
+        # Set foreign keys to None initially
         race=None, 
         alignment=None, 
         background=None,
-        # Set optional fields to None or default values
+        # Set optional fields to None or default values respectively
         age=None,
         sex=None,
         height="",
@@ -323,7 +322,7 @@ def character_description(request, character_id):
         form = DescriptionForm()
     return render(request, 'characterforge/character_description.html', {'form': form, 'character_id': character_id})
 
-
+# Confirm Character Infromation and Save
 @login_required(login_url='login')
 def confirm_character(request, character_id):
     character = get_object_or_404(Character, id=character_id)
@@ -336,14 +335,14 @@ def confirm_character(request, character_id):
 
     return render(request, 'characterforge/confirm_character.html', {'character': character, 'character_id': character_id})
 
-
+# Detailed view of a specific character
 @login_required(login_url='login')
 def character_detail_view(request, character_id):
     character = get_object_or_404(Character, id=character_id)
 
     return render(request, 'characterforge/character_detail.html', {'character': character, 'character_id': character_id})
     
-
+# Form view with all Character model fields for editing
 @login_required(login_url='login')    
 def character_edit_view(request, character_id):
     character = get_object_or_404(Character, id=character_id, user=request.user)
@@ -358,7 +357,7 @@ def character_edit_view(request, character_id):
             form = CharacterForm(instance=character)
     return render(request, 'characterforge/edit_character.html', {'form': form, 'character':character, 'character_id': character_id})
 
-
+# Delete character view
 @login_required(login_url='login')   
 def delete_character(request, character_id):
     character = get_object_or_404(Character, id=character_id, user=request.user)
@@ -367,7 +366,7 @@ def delete_character(request, character_id):
         return redirect('character-list')
     return render(request, 'characterforge/confirm_delete.html', {'character': character})
     
-
+# Display a list of all characters from logged-in user
 @login_required(login_url='login')
 def character_list_view(request):
     characters = Character.objects.filter(user=request.user)

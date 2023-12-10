@@ -2,6 +2,7 @@ from django import forms
 from .models import Character, Sex
 from .api_service import *
 
+# Forms for setting specific character options
 class RaceForm(forms.Form):
     race = forms.ChoiceField(choices=[])
 
@@ -124,3 +125,5 @@ class CharacterForm(forms.ModelForm):
     class Meta:
         model = Character
         fields = '__all__'
+
+# Future Additions: Add Homebrew Forms for custom races, classes, etc.

@@ -4,7 +4,10 @@ from django.contrib.auth.models import AbstractUser
 class User(AbstractUser):
     pass
 
+# Each of the API models require characterforge/management/commands/*.py files to be run
+# in order to populate them with data from the API: e.g. python3 manage.py populate_races
 
+# Hold character race data pulled from the 5e API
 class APIRace(models.Model):
     index = models.CharField(max_length=100, unique=True)
     name = models.CharField(max_length=100)
@@ -12,7 +15,7 @@ class APIRace(models.Model):
     def __str__(self):
         return self.name
 
-
+# Holds character class data pulled from the 5e API
 class APIClass(models.Model):
     index = models.CharField(max_length=100, unique=True)
     name = models.CharField(max_length=100)
@@ -20,7 +23,7 @@ class APIClass(models.Model):
     def __str__(self):
         return self.name
 
-
+# Holds character feat data pulled from the 5e API
 class APIFeat(models.Model):
     index = models.CharField(max_length=100, unique=True)
     name = models.CharField(max_length=100)
@@ -28,7 +31,7 @@ class APIFeat(models.Model):
     def __str__(self):
         return self.name
     
-
+# Holds character alignment data pulled from the 5e API
 class APIAlignment(models.Model):
     index = models.CharField(max_length=100, unique=True)
     name = models.CharField(max_length=100)
@@ -36,7 +39,7 @@ class APIAlignment(models.Model):
     def __str__(self):
         return self.name
 
-
+# Holds character proficiencies data pulled form the 5e API
 class APIProficiency(models.Model):
     index = models.CharField(max_length=100, unique=True)
     name = models.CharField(max_length=100)
@@ -44,7 +47,7 @@ class APIProficiency(models.Model):
     def __str__(self):
         return self.name
 
-
+# Holds character skill proficiencies data pulled from the 5e API
 class APISkill(models.Model):
     index = models.CharField(max_length=100, unique=True)
     name = models.CharField(max_length=100)
@@ -52,7 +55,7 @@ class APISkill(models.Model):
     def __str__(self):
         return self.name
 
-
+# Holds character spell data pulled from the 5e API
 class APISpell(models.Model):
     index = models.CharField(max_length=100, unique=True)
     name = models.CharField(max_length=100)
@@ -60,7 +63,7 @@ class APISpell(models.Model):
     def __str__(self):
         return self.name
     
-
+# Holds character background data pulled from the 5e API
 class APIBackground(models.Model):
     index = models.CharField(max_length=100, unique=True)
     name = models.CharField(max_length=100)
@@ -68,7 +71,7 @@ class APIBackground(models.Model):
     def __str__(self):
         return self.name
     
-
+# Other Character related models for setting specific character data
 class Skill(models.Model):
     name = models.CharField(max_length=100)
     description = models.TextField()
@@ -158,3 +161,5 @@ class CharacterClass(models.Model):
 
     def __str__(self):
         return f"{self.character.name} - {self.class_choice.name} (Level {self.level})"
+    
+# Future additions: Add Homebrew models for users to create custom races, classes, etc.
