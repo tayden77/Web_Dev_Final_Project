@@ -7,7 +7,10 @@
     <div class="col-md-3"></div>
     <div class="col-md-6">
         <h1 style="text-align: center;">Choose Your Character's Alignment</h1>
-        <p style="text-align: center;">Alignment is a rule in Dungeons & Dragons which describes a character or creature's moral and ethical outlook.</p>      
+        <hr>
+        <p style="text-align: center;">
+          In Dungeons & Dragons, alignment is a key aspect of your character's identity. It represents their moral compass and ethical beliefs, influencing how they interact with the world and make decisions. Alignment is a combination of two factors: one that describes morality (good, evil, or neutral) and another that describes attitude (lawful, chaotic, or neutral).
+        </p>      
         <form class="form-control" method="post" style="background-color: black; color: white; padding: 50px;">
         {% csrf_token %}
         {{ form.as_p }}

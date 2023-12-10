@@ -7,7 +7,12 @@
     <div class="col-md-3"></div>
     <div class="col-md-6">
       <h1 style="text-align: center;">Choose Your Character's Ability Scores</h1>
-      <p style="text-align: center;">Ability scores are your D&D character's primary statistics and determine how good they are at doing anything. These stats consist of strength, constitution, intelligence, wisdom, charisma and dexterity.</p>
+      <hr>
+      <p style="text-align: center;">
+        In the realm of Dungeons & Dragons, ability scores are the foundation of your character's talents and potential. They define how strong, agile, intelligent, and charming your character is. Whether you're swinging a sword, concocting a potion, or persuading an ally, these scores shape every action and decision. Will your character be a muscular champion, a nimble acrobat, a brilliant tactician, or a charismatic leader? Distribute your points across Strength, Dexterity, Constitution, Intelligence, Wisdom, and Charisma to mold a hero that aligns with your envisioned journey.
+        <hr>
+        One way to distribute your points is called "Point-buy", where each score starts at 8 and you have a total of 27 points to distribute across the different ability scores to a maximum of 15 for each individual score.
+      </p>
       <form class="form-control" method="post" style="background-color: black; color: white; padding: 50px;">
       {% csrf_token %}
       {{ form.as_p }}

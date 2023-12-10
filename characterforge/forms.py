@@ -22,12 +22,12 @@ class ClassForm(forms.Form):
         print("Class choices in ClassForm:", self.fields['class_choice'].choices)
 
 class AbilityScoreForm(forms.Form):
-    strength = forms.IntegerField(label='Strength', initial=10)
-    dexterity = forms.IntegerField(label='Dexterity', initial=10)
-    constitution = forms.IntegerField(label='Constitution', initial=10)
-    intelligence = forms.IntegerField(label='Intelligence', initial=10)
-    wisdom = forms.IntegerField(label='Wisdom', initial=10)
-    charisma = forms.IntegerField(label='Charisma', initial=10)
+    strength = forms.IntegerField(label='Strength', initial=8)
+    dexterity = forms.IntegerField(label='Dexterity', initial=8)
+    constitution = forms.IntegerField(label='Constitution', initial=8)
+    intelligence = forms.IntegerField(label='Intelligence', initial=8)
+    wisdom = forms.IntegerField(label='Wisdom', initial=8)
+    charisma = forms.IntegerField(label='Charisma', initial=8)
 
 class FeatForm(forms.Form):
     feat = forms.MultipleChoiceField(choices=[])

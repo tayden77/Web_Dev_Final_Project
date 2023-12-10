@@ -7,9 +7,14 @@
     <div class="col-md-3"></div>
     <div class="col-md-6">
         <h1 style="text-align: center;">Choose Your Character's Equipment</h1>
+        <hr>
         <p style="text-align: center;">
-          When you create your character, you receive equipment based on a combination of your class and background. Alternatively, you can start with a number of gold pieces based on your class and spend them on items from the lists in this section. 
+          In the world of Dungeons & Dragons, your character's equipment includes everything they carry, from weapons and armor to adventuring gear. This gear is essential for survival, combat, and exploring the fantasy realms.
         </p>
+        <hr>
+        <p class="mb-1">• Class-Based Equipment: Each class comes with a standard set of equipment, typically including weapons, armor, and other useful items for your character's adventures.</p>
+        <p class="mb-1">• Background-Based Gear: Your character's background also contributes to their starting equipment, offering items that reflect their life before adventuring.</p>
+        <p>• Purchasing Equipment: Alternatively, you may opt to use a set amount of gold (based on your class) to purchase equipment. This option allows for more personalized gear choices to suit your character's needs and preferences.</p>
         <form class="form-control" method="post" style="background-color: black; color: white; padding: 50px;">
         {% csrf_token %}
         {{ form.as_p }}

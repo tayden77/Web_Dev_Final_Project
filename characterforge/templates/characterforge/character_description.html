@@ -7,9 +7,21 @@
     <div class="col-md-2"></div>
     <div class="col-md-8">
         <h1 style="text-align: center;">Complete Your Character's Description And Backstory Details</h1>
+        <hr>
         <p style="text-align: center;">
-          Describing your character gives you the opportunity to bring them to life, by giving your adventurer their physical description and a personality. Here you also give your character their backstory, telling of their life before becoming an adventurer, their ideals, bonds, flaws, and any other information you would like them to have. 
+          This is your chance to breathe life into your Dungeons & Dragons character. Beyond the stats and combat abilities, your character is a story waiting to be told. Here, you can shape their physical appearance, personality traits, and the rich tapestry of their past.
         </p>
+        <small>
+          <p class="mb-1">
+            Physical Traits: Describe your character's appearance - from the color of their eyes to their hair and skin. Each feature adds depth to who they are in the world of D&D.
+          </p>
+          <p class="mb-1">
+            Backstory: Every hero has a past. Your character's backstory is a narrative of their life before adventuring. Where did they grow up? What events shaped their path? This story can include family history, significant life events, cherished memories, or personal motivations.
+          </p>
+          <p>
+            Ideals, Bonds, and Flaws: Flesh out your character's depth with ideals they strive for, bonds they hold dear, and flaws that make them imperfectly human (or elf, dwarf, etc.). These elements add layers to role-playing opportunities.
+          </p>
+        </small>
         <form class="form-control" method="post" enctype="multipart/form-data" style="background-color: black; color: white; padding: 50px;">
         {% csrf_token %}
         {{ form.as_p }}

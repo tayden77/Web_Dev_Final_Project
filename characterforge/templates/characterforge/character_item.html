@@ -7,7 +7,11 @@
     <div class="col-md-3"></div>
     <div class="col-md-6">
         <h1 style="text-align: center;">Choose Your Character's Magic Items</h1>
-        <p style="text-align: center;">A magic item is any object that is imbued with magic powers. These items may act on their own or be the tools of the character possessing them.</p>
+        <hr>
+        <p style="text-align: center;">
+          Magic items in Dungeons & Dragons are extraordinary objects imbued with mystical powers. These enchanting items range from armor and weapons to rings and scrolls, each with unique magical effects that can turn the tide of an adventure.
+        </p>
+        <p>Remember: Magic items are rare and coveted. Your character may start with one or two, but others can be found or earned during your adventures.</p>
         <form class="form-control" method="post" style="background-color: black; color: white; padding: 50px;">
         {% csrf_token %}
         {{ form.as_p }}
