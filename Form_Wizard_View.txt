@@ -1,4 +1,4 @@
-I attempted for quite some time to get this form wizard implementation working and had to revert back to a manual step-by-step
+I attempted, for quite some time, to get this form wizard implementation working and had to revert back to a manual step-by-step
 approach using several templates and views.
 
 class CharacterCreationWizard(SessionWizardView):
