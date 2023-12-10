@@ -1,0 +1,21 @@
+{% extends 'characterforge/layout.html' %}
+{% block main %}
+<div class="progress mb-5" role="progressbar" aria-label="Animated striped example" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100">
+    <div class="progress-bar progress-bar-striped progress-bar-animated" style="width: 8.33%"></div>
+</div>
+<div class="row" style="color: white;">
+    <div class="col-md-3"></div>
+    <div class="col-md-6">
+        <h1 style="text-align: center;">Choose Your Character's Race</h1>
+        <p style="text-align: center;">
+            Race or species is a rule in Dungeons & Dragons referring to the fantasy ancestry of a character. The term is primarily used to refer to those species intended to represent player characters, as opposed to monsters. Popular races include human, elf, dwarf and halfling.
+        </p>
+        <form class="form-control" method="post" style="background-color: black; color: white; padding: 50px;">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button class="btn btn-success col-md-12 mt-4" type="submit">Continue</button>
+        </form>
+    </div>
+    <div class="col-md-3"></div>
+</div>
+{% endblock %}

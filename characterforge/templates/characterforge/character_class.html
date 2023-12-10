@@ -1,0 +1,22 @@
+{% extends 'characterforge/layout.html' %}
+{% block main %}
+<div class="progress mb-5" role="progressbar" aria-label="Animated striped example" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100">
+    <div class="progress-bar progress-bar-striped progress-bar-animated" style="width: 16.66%"></div>
+</div>
+<div class="row" style="color: white;">
+    <div class="col-md-3"></div>
+    <div class="col-md-6">
+        <h1 style="text-align: center;">Choose Your Character's Class</h1>
+        <p style="text-align: center;">
+            Class defines an adventurer's skillset: Wizards do magic, druids interface with nature, and barbarians hit things. Not a job or an area of study, classes are more like occupations or callings. A bard, for example, might not get paid to play music, but they weave magical music-playing into their life and ambitions.
+        </p>
+        <form class="form-control" method="post" style="background-color: black; color: white; padding: 50px;">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button class="btn btn-success col-md-12 mt-4" type="submit">Continue</button>
+        </form>
+    </div>
+    <div class="col-md-3"></div>
+</div>
+{% endblock %}
+

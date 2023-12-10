@@ -1,0 +1,29 @@
+{% extends 'characterforge/layout.html' %}
+{% block main %}
+<div class="progress mb-5" role="progressbar" aria-label="Animated striped example" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100">
+  <div class="progress-bar progress-bar-striped progress-bar-animated" style="width: 75.99%"></div>
+</div>
+<div class="row" style="color: white;">
+    <div class="col-md-3"></div>
+    <div class="col-md-6">
+        <h1 style="text-align: center;">Choose Your Character's Spells</h1>
+        <p style="text-align: center;">
+          A Spell is the magical effect that occurs when a character takes and manipulates the invisible strands of raw, magical energy present in the world of D&D. Each spell caster gains this ability depending on their class:
+        </p>
+        <small style="text-align: left;">
+          <p class="mb-1">• for clerics and paladins, their deity bestows this power upon them</p>
+          <p class="mb-1">• for bards, they manipulate the magic present in words - thought to have uttered the world into existence</p>
+          <p class="mb-1">• for druids and rangers, nature and nature deities grant them this power</p>
+          <p class="mb-1">• for sorcerers, a phenomenal event has imbued them with innate magical abilities</p>
+          <p class="mb-1">• for wizards, knowledge bestows them the secrets of the magical universe</p>
+          <p class="mb-1">• and for warlocks, a pact with an otherworldly being opens the door to the ability of spell casting.</p>
+        </small>
+        <form class="form-control" method="post" style="background-color: black; color: white; padding: 50px;">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button class="btn btn-success col-md-12 mt-4" type="submit">Continue</button>
+        </form>
+    </div>
+    <div class="col-md-3"></div>
+</div>
+{% endblock %}

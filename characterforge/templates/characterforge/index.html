@@ -1,0 +1,26 @@
+{% extends "characterforge/layout.html" %}
+
+{% block main %}
+<span>
+    <div class="row">
+        <div class="col-md-3">
+
+        </div>
+        <div class="col-md-6">
+            <div class="card text-center text-white" style="margin: 20px; background-color: black;">
+                <div class="card-header">
+                    Create A New Character
+                </div>  
+                <div class="card-body">
+                    <h5 class="card-title"></h5>
+                    <p class="card-text">Ready to create your unique Dungeons & Dragons character? This easy-to-use Character Creator guides you through each step, making it simple to choose your character's race, abilities, and skills. Perfect for both new players and D&D veterans, this tool brings your character to life in a fun and straightforward way. Let's dive in and get your adventure rolling!</p>
+                    <a class="btn btn-primary col-md-10" href="{% url 'initialize-character' %}" role="button">Start a New Character</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+
+        </div>
+    </div>
+</span>
+{% endblock %}

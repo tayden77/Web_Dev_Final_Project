@@ -1,0 +1,209 @@
+I attempted for quite some time to get this form wizard implementation working and had to revert back to a manual step-by-step
+approach using several templates and views.
+
+class CharacterCreationWizard(SessionWizardView):
+    template_name = 'characterforge/wizard_form.html'
+    form_list = [
+        (RaceForm), 
+        (ClassForm), 
+        (AbilityScoreForm), 
+        (FeatForm), 
+        (AlignmentForm), 
+        (BackgroundForm), 
+        (SkillForm),
+        (ProficiencyForm), 
+        (SpellForm), 
+        (EquipmentForm), 
+        (MagicItemForm), 
+        (DescriptionForm)
+    ]
+
+    def get_form_initial(self, step):
+        initial = {}
+        if step == '0':
+            initial['race'] = APIRace.objects.all().values_list('id', 'name')
+        elif step == '1':
+            initial['class_choice'] = APIClass.objects.all().values_list('id', 'name')
+        elif step == '3':
+            initial['feat'] = APIFeat.objects.all().values_list('id', 'name')
+        elif step == '4':
+            initial['alignment'] = APIAlignment.objects.all().values_list('id', 'name')
+        elif step == '5':
+            initial['background'] = APIBackground.objects.all().values_list('id', 'name')
+        elif step == '6':
+            initial['skill'] = APISkill.objects.all().values_list('id', 'name')
+        elif step == '7':
+            initial['proficiency'] = APIProficiency.objects.all().values_list('id', 'name')
+        elif step == '8':
+            initial['spell'] = APISpell.objects.all().values_list('id', 'name')
+        elif step == '9':
+            initial['eq'] = Equipment.objects.filter(equipment_type='OTHER').values_list('id', 'name')
+        elif step == '10':
+            initial['item'] = Equipment.objects.filter(equipment_type='MAGIC').values_list('id', 'name')
+        return initial
+    
+    def get_form_instance(self, step):
+        if step == '0':
+            return APIRace()
+        elif step == '1':
+            return APIClass()
+        elif step == '3':
+            return APIFeat()
+        elif step == '4':
+            return APIAlignment()
+        elif step == '5':
+            return APIBackground()
+        elif step == '6':
+            return APISkill()
+        elif step == '7':
+            return APIProficiency()
+        elif step == '8':
+            return APISpell()
+        elif step == '9':
+            return Equipment(equipment_type='OTHER')
+        elif step == '10':
+            return Equipment(equipment_type='MAGIC')
+            
+    # Function to set initial form choices based on the api_service functions
+    def get_form(self, step='1', data=None, files=None):
+        # form = super(CharacterCreationWizard, self).get_form(step, data, files)
+        print("Current step: ", step) 
+        if step == '0':
+            race_choices = APIRace.objects.all().values_list('id', 'name')
+            print("Race choices in get_form:", race_choices)
+            form = RaceForm(data=data, race_choices=race_choices)
+        elif step == '1':
+            class_choices = APIClass.objects.all().values_list('id', 'name')
+            print("Class choices in get_form:", class_choices)
+            form = ClassForm(data=data, class_choices=class_choices)
+        elif step == '3':
+            feat_choices = APIFeat.objects.all().values_list('id', 'name')
+            form = FeatForm(data=data, feat_choices=feat_choices)
+        elif step == '4':
+            alignment_choices = APIAlignment.objects.all().values_list('id', 'name')
+            form = AlignmentForm(data=data, alignment_choices=alignment_choices)
+        elif step == '5':
+            background_choices = APIBackground.objects.all().values_list('id', 'name')
+            form = BackgroundForm(data=data, background_choices=background_choices)
+        elif step == '6':
+            skill_choices = APISkill.objects.all().values_list('id', 'name')
+            form = SkillForm(data=data, skill_choices=skill_choices)
+        elif step == '7':
+            proficiency_choices = APIProficiency.objects.all().values_list('id', 'name')
+            form = ProficiencyForm(data=data, proficiency_choices=proficiency_choices)
+        elif step == '8':
+            spell_choices = APISpell.objects.all().values_list('id', 'name')
+            form = SpellForm(data=data, spell_choices=spell_choices)
+        elif step == '9':
+            other_items = Equipment.objects.filter(equipment_type='OTHER').values_list('id', 'name')
+            form = EquipmentForm(data=data, other_items=other_items)
+        elif step == '10':
+            magic_items = Equipment.objects.filter(equipment_type='MAGIC').values_list('id', 'name')
+            form = MagicItemForm(data=data, magic_items=magic_items)
+        else:
+            form = super(CharacterCreationWizard, self).get_form(step, data, files)
+        print("Final form fields before return: ", form.fields)
+        print("Final form as HTML before return: ", form.as_p())
+        return form
+
+
+    def done(self, form_list, **kwargs):
+        data = {key: value for form in form_list for key, value in form.cleaned_data.items()}
+        new_character = Character.objects.create(
+            user=self.request.user,
+            name=data.get('name'),
+            age=data.get('age'),
+            sex=data.get('sex'),
+            height=data.get('height'),
+            weight=data.get('weight'),
+            hair_color=data.get('hair_color'),
+            eye_color=data.get('eye_color'),
+            skin_color=data.get('skin_color'),
+            trait_1=data.get('trait1'),
+            trait_2=data.get('trait2'),
+            ideals=data.get('ideal'),
+            bonds=data.get('bond'),
+            flaws=data.get('flaw'),
+            faction=data.get('faction'),
+            backstory=data.get('backstory'),
+            race=data.get('race'),
+            alignment=data.get('alignment'),
+            background=data.get('background'),
+            strength=data.get('strength'),
+            dexterity=data.get('dexterity'),
+            constitution=data.get('constitution'),
+            intelligence=data.get('intelligence'),
+            wisdom=data.get('wisdom'),
+            charisma=data.get('charisma')
+        )
+
+        # Handle many-to-many relationships
+        if 'class_choice' in data:
+            for class_id in data['class_choice']:
+                class_instance = APIClass.objects.get(id=class_id)
+                CharacterClass.objects.create(character=new_character, class_choice=class_instance, level=1)
+
+        if 'feat' in data:
+            for feat_name in data['feat']:
+                if Feat.objects.filter(name=feat_name).exists():
+                    feat_instance = Feat.objects.get(name=feat_name)
+                    new_character.feats.add(feat_instance)
+
+        if 'proficiency' in data:
+            for proficiency_name in data['proficiency']:
+                if Proficiency.objects.filter(name=proficiency_name).exists():
+                    proficiency_instance = Proficiency.objects.get(name=proficiency_name)
+                    new_character.proficiencies.add(proficiency_instance)
+
+        if 'skill' in data:
+            for skill_name in data['skill']:
+                if Skill.objects.filter(name=skill_name).exists():
+                    skill_instance = Skill.objects.get(name=skill_name)
+                    new_character.skills.add(skill_instance)
+
+        if 'spell' in data:
+            for spell_id in data['spell']:
+                spell_instance = APISpell.objects.get(id=spell_id)
+                CharacterSpell.objects.create(character=new_character, spell=spell_instance, level_learned=1)
+
+        if 'eq' in data:
+            for eq_name in data['eq']:
+                if Equipment.objects.filter(name=eq_name, equipment_type='OTHER').exists():
+                    eq_instance = Equipment.objects.get(name=eq_name)
+                    new_character.equipment.add(eq_instance)
+
+        if 'item' in data:
+            for item_name in data['item']:
+                if Equipment.objects.filter(name=item_name, equipment_type='MAGIC').exists():
+                    item_instance = Equipment.objects.get(name=item_name)
+                    new_character.equipment.add(item_instance)
+
+        return redirect('confirm-character', character_id=new_character.id)
+
+
+
+Intended Template for form wizard (wizard_form.html):
+
+{% extends 'characterforge/layout.html' %}
+
+{% block main %}
+    <form action="" method="post">{% csrf_token %}
+        {{ wizard.management_form }}
+
+        {% if wizard.form.forms %}
+            {{ wizard.form.management_form }}
+            {% for form in wizard.form.forms %}
+                {{ form }}
+            {% endfor %}
+        {% else %}
+            {{ wizard.form }}
+        {% endif %}
+
+        <button type="submit">Continue</button>
+    </form>
+{% endblock %}
+
+
+urls.py:
+
+    path('create-character/', CharacterCreationWizard.as_view(), name='create-character'),

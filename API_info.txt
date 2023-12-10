@@ -1,0 +1,74 @@
+def character_creator(request):
+    races_data = get_races()
+    if races_data:
+        races = [race['name'] for race in races_data.get('results', [])]
+        print(races)
+    else:
+        races = []
+
+    classes_data = get_classes()
+    if classes_data:
+        classes = [cla['name'] for cla in classes_data.get('results', [])]
+    else:
+        classes = []
+
+    ability_scores_data = get_ability_scores()
+    if ability_scores_data:
+        ability_scores = [score['name'] for score in ability_scores_data.get('results', [])]
+    else:
+        ability_scores = []
+
+    feats_data = get_feats()
+    if feats_data:
+        feats = [feat['name'] for feat in feats_data.get('results', [])]
+    else:
+        feats = []
+
+    alignments_data = get_alignments()
+    if alignments_data:
+        alignments = [alignment['name'] for alignment in alignments_data.get('results', [])]
+    else:
+        alignments = []
+
+    backgrounds_data = get_backgrounds()
+    if backgrounds_data:
+        backgrounds = [background['name'] for background in backgrounds_data.get('results', [])]
+    else:
+        backgrounds = []
+
+    equipment_data = get_equipment()
+    if equipment_data:
+        equipment = [eq['name'] for eq in equipment_data.get('results', [])]
+    else:
+        equipment = []
+
+    magic_items_data = get_magic_items()
+    if magic_items_data:
+        magic_items = [item['name'] for item in magic_items_data.get('results', [])]
+    else:
+        magic_items = []
+
+    spells_data = get_spells()
+    if spells_data:
+        spells = [spell['name'] for spell in spells_data.get('results', [])]
+    else:
+        spells = []
+
+    proficiencies_data = get_proficiencies()
+    if proficiencies_data:
+        proficiencies = [proficiency['name'] for proficiency in proficiencies_data.get('results', [])]
+    else:
+        proficiencies = []
+
+    return render(request, 'characterforge/character_creator.html', {
+        'races': races,
+        'classes': classes,
+        'ability_scores': ability_scores,
+        'feats': feats,
+        'alignments': alignments,
+        'backgrounds': backgrounds,
+        'equipment': equipment,
+        'magic_items': magic_items,
+        'spells': spells,
+        'proficiencies': proficiencies
+    })

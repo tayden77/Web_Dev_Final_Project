@@ -1,0 +1,28 @@
+html, body {
+    margin: 0;
+    padding: 0;
+}
+
+.navbar-wrapper {
+    position: relative;
+    width: 100%;
+}
+
+.nav-image {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+.nav-content {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    text-align: center;
+}
+
+.nav-content h1 {
+    color: black;
+    margin: 0;
+}

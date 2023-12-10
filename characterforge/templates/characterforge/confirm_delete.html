@@ -1,0 +1,10 @@
+{% extends 'characterforge/base.html' %}
+
+{% block content %}
+<h2>Are you sure you want to delete {{ character.name }}?</h2>
+<form method="post">
+    {% csrf_token %}
+    <button class="btn btn-warning mb-4" type="submit">Yes, delete this character</button>
+    <a class="btn btn-primary mb-4" href="{% url 'character-detail' character.id %}">Cancel</a>
+</form>
+{% endblock %}

@@ -1,0 +1,103 @@
+{% extends "characterforge/layout.html" %}
+{% load static %}
+
+{% block main %}
+<!-- View Character Details -->
+<h2 style="text-align: left; color: white; margin: 20px;">{{character.name}}</h2>
+<div class="row" style="color: white;">
+    <div class="col-md-5">
+        {% if character.image %}
+            <img src="{{ character.image.url }}" alt="Character Image" style="max-width: 500px; max-height: auto; margin-bottom: 40px;">
+        {% else %}
+            <img src="{% static 'characterforge/image.png' %}" alt="Default Image" style="max-width: 500px; margin-bottom: 40px;">
+        {% endif %}
+    </div>
+    <div class="col-md-4">
+        <p class="mb-1">{{character.race}} -
+
+            {% for class in character.characterclass_set.all %}
+                {{ class.class_choice.name }} (Level {{ class.level }}){% if not forloop.last %}, {% endif %}
+            {% empty %}
+                No Classes
+            {% endfor %}
+        </p>
+        <p>STR: {{character.strength}} | DEX: {{character.dexterity}} | CON: {{character.constitution}} | INT: {{character.intelligence}} | WIS: {{character.wisdom}} | CHA: {{character.charisma}}</p>
+        <hr>
+        <p>Skills: 
+            {% for skill in character.skills.all %}
+                {{ skill.name }}{% if not forloop.last %}, {% endif %}
+            {% empty %}
+                No Feats
+            {% endfor %}
+        <p>Feats:
+            {% for feat in character.feats.all %}
+                {{ feat.name }}{% if not forloop.last %}, {% endif %}
+            {% empty %}
+                No Feats
+            {% endfor %}
+        </p>
+        <p>Proficiencies:
+            {% for proficiency in character.proficiencies.all %}
+                {{ proficiency.name }}{% if not forloop.last %}, {% endif %}
+            {% empty %}
+                No Feats
+            {% endfor %}
+        </p>
+        <p>Spells: 
+            {% for spell in character.characterspell_set.all %}
+                {{ spell.spell.name }} (Level {{ spell.level }}){% if not forloop.last %}, {% endif %}
+            {% empty %}
+                No Classes
+            {% endfor %}
+        </p>
+        <p>Equipment:
+            {% for equipment in character.equipment.all %}
+                {{ equipment.name }}{% if not forloop.last %}, {% endif %}
+            {% empty %}
+                No Feats
+            {% endfor %}
+        </p>
+        <p>Background: {{ character.background }}</p>
+        <p>Faction: {{ character.faction }}</p>
+    </div>
+    <div class="col-md-3">
+      <br>
+      <h5>Demographics</h5>
+      <hr>
+        <small><p class="mb-1">Age: {{character.age}}</p></small>
+        <small><p class="mb-1">Sex: {{character.sex}}</p></small>
+        <small><p class="mb-1">Height: {{character.height}}</p></small>
+        <small><p class="mb-1">Weight: {{character.weight}}</p></small>
+        <small><p class="mb-1">Hair: {{character.hair_color}}</p></small>
+        <small><p class="mb-1">Eyes: {{character.eye_color}}</p></small>
+        <small><p class="mb-1">Skin: {{character.skin_color}}</p></small>
+    </div>
+</div>
+<div class="row" style="color: white;">
+    <div class="col-md-12">
+        <hr>
+        <p>Trait 1: {{ character.trait_1 }}</p>
+        <p>Trait 2: {{ character.trait_2 }}</p>
+        <p>Ideals: {{ character.ideals }}</p>
+        <p>Bonds: {{ character.bonds }}</p>
+        <p>Flaws: {{ character.flaws }}</p>
+        <p>Backstory: {{ character.backstory }}</p>
+    </div>
+</div>
+<!-- Finalize the character -->
+<div class="row">
+    <div class="col-md-6">
+
+        <!-- Go back and edit -->
+        <a class="btn btn-primary col-md-12 mt-4" href="{% url 'edit-character' character_id=character.id %}">Edit Character</a>
+    </div>
+    <div class="col-md-6">
+
+        <!-- Delete character -->
+        <form action="{% url 'delete-character' character_id=character.id %}" method="post">
+          {% csrf_token %}
+          <input class="btn btn-danger col-md-12 mt-4" type="submit" value="Delete Character" onclick="return confirm('Are you sure you want to delete this character?');">
+      </form>
+    </div>
+</div>
+{% endblock %}

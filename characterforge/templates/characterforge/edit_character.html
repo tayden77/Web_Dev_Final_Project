@@ -1,0 +1,22 @@
+{% extends 'characterforge/layout.html' %}
+{% block main %}
+<div class="row" style="color: white;">
+
+    <div class="col-md-2"></div>
+    <div class="col-md-8">
+        <h2>Edit Character</h2>
+        <form class="form-control" method="post" style="background-color: black; color: white; padding: 50px;">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button class="btn btn-success col-md-12 mt-4" type="submit">Continue</button>
+        </form>
+        <form action="{% url 'delete-character' character_id=character.id %}" method="post">
+            {% csrf_token %}
+            <input class="btn btn-danger col-md-12 mt-4" type="submit" value="Delete Character" onclick="return confirm('Are you sure you want to delete this character?');">
+        </form>
+    </div>
+    <div class="col-md-2"></div>
+</div>
+{% endblock %}
+
+
