@@ -1,4 +1,4 @@
-from .settings import *
+
 import environ
 
 ALLOWED_HOSTS = ['charactercreator.us', 'www.charactercreator.us']
