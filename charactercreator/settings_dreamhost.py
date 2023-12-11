@@ -1,5 +1,5 @@
 
-import environ
+""" import environ
 
 ALLOWED_HOSTS = ['charactercreator.us', 'www.charactercreator.us']
 DEBUG=False
@@ -32,4 +32,4 @@ SECURE_HSTS_INCLUDE_SUBDOMAINS = True
 
 SECURE_SSL_REDIRECT = True
 SESSION_COOKIE_SECURE = True
-CSRF_COOKIE_SECURE = True
+CSRF_COOKIE_SECURE = True """
