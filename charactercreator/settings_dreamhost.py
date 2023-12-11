@@ -1,11 +1,11 @@
 from .settings import *
 
 
-ALLOWED_HOSTS = ['deals.uaa490.org', 'www.deals.uaa490.org']
+ALLOWED_HOSTS = ['charactercreator.us', 'www.charactercreator.us']
 DEBUG=False
 
-STATIC_ROOT = '/home/deals490/deals.uaa490.org/public/static/'
-MEDIA_ROOT = '/home/deals490/deals.uaa490.org/public/media/'
+STATIC_ROOT = '/home/hjriebe/charactercreator.us/public/static/'
+MEDIA_ROOT = '/home/hjriebe/charactercreator.us/public/media/'
 
 import environ
 env = environ.Env()
@@ -17,7 +17,7 @@ DATABASES = {
     'NAME': env('DATABASE_NAME'),
     'USER': env('DATABASE_USER'),
     'PASSWORD': env('DATABASE_PASSWORD'),
-	'HOST': 'mysql.deals.uaa490.org',
+	'HOST': 'mysql.charactercreator.us',
 	'PORT': '3306',
     }
 }
