@@ -25,3 +25,12 @@ DATABASES = {
 EMAIL_HOST_PASSWORD = env('SENDGRID_API_KEY')
 
 SECRET_KEY = env('SECRET_KEY')
+
+SECURE_HSTS_SECONDS = 360                                                                                       
+SECURE_HSTS_PRELOAD = 360                                                                                       
+SECURE_HSTS_INCLUDE_SUBDOMAINS = 360                                                                                       
+
+SECURE_SSL_REDIRECT = True
+SESSION_COOKIE_SECURE = True
+CSRF_COOKIE_SECURE = True
+DEBUG = False
