@@ -24,6 +24,7 @@
                                     <div class="auth-links col" style="color: white; background-color: black; padding-top: 10px;">
                                         {% if user.is_authenticated %}
                                             Welcome <strong>{{ user.username }}!</strong>
+                                            <a class="btn btn-sm col-4 mb-4 mt-4" href="{% url 'password_change' %}" style="font-weight: bold; background-color: red; color: black; margin-left: 20px;">Change Password</a>
                                             <a class="btn btn-sm col-4 mb-4 mt-4" href="{% url 'logout' %}" style="font-weight: bold; background-color: red; color: black; margin-left: 20px;">Log Out</a>
                                         {% else %}
                                             <a class="btn btn-outline-light mt-4" href="{% url 'login' %}" style="font-weight: bold; background-color: red; color: black;" >Log In</a>

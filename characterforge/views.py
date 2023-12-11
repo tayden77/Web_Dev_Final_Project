@@ -7,6 +7,11 @@ from django.db import IntegrityError
 from .models import *
 from .forms import *
 from .api_service import *
+from django.contrib.auth import views as auth_views
+
+
+class PasswordChangedView(auth_views.PasswordChangeView):
+    success_url = reverse_lazy('index')
 
 # Generic Login View
 def login_view(request):

@@ -1,6 +1,16 @@
 from django import forms
 from .models import Character, Sex
 from .api_service import *
+from django.contrib.auth.forms import PasswordResetForm
+
+class MyPasswordResetForm(PasswordResetForm):
+
+    def is_valid(self):
+        email = self.data['email']
+        if sum([1 for u in self.get_users(email)]) == 0:
+            self.add_error(None, "Unknown email; try again.")
+            return False
+        return super().is_valid()
 
 # Forms for setting specific character options
 class RaceForm(forms.Form):
