@@ -87,6 +87,7 @@ def initailize_character(request):
         constitution=8,
         intelligence=8,
         wisdom=8,
+        charisma=8,
         name="Character Name",
         # Set foreign keys to None initially
         race=None, 
