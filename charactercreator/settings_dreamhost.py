@@ -1,5 +1,5 @@
 from .settings import *
-
+import environ
 
 ALLOWED_HOSTS = ['charactercreator.us', 'www.charactercreator.us']
 DEBUG=False
@@ -7,7 +7,7 @@ DEBUG=False
 STATIC_ROOT = '/home/hjriebe/charactercreator.us/public/static/'
 MEDIA_ROOT = '/home/hjriebe/charactercreator.us/public/media/'
 
-import environ
+
 env = environ.Env()
 environ.Env.read_env()
 
