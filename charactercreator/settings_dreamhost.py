@@ -21,3 +21,5 @@ DATABASES = {
 	'PORT': '3306',
     }
 }
+
+EMAIL_HOST_PASSWORD = env('SENDGRID_API_KEY')

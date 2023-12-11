@@ -11,8 +11,7 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 """
 
 from pathlib import Path
-import os
-
+import os, environ
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 # BASE_DIR = Path(__file__).resolve().parent.parent
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -157,12 +156,10 @@ AUTH_PASSWORD_VALIDATORS = []
 EMAIL_BACKEND='django.core.mail.backends.filebased.EmailBackend'
 EMAIL_FILE_PATH = os.path.join(BASE_DIR, 'sent_emails')
 
-SENDGRID_API_KEY = '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'
 DEFAULT_FROM_EMAIL = 'hjriebe@alaska.edu'
 
 EMAIL_HOST = 'smtp.sendgrid.net'
 EMAIL_HOST_USER = 'apikey'
-EMAIL_HOST_PASSWORD = SENDGRID_API_KEY
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
